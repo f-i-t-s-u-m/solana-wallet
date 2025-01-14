@@ -83,7 +83,7 @@ export default function RootLayout({
                     </li>
                   </ol>
                 </div>
-                <WalletMultiButton wallets={wallets} />
+                <WalletMultiButton />
                 {/* <WalletMultiButton className="p-0 m-0 h-5" /> */}
               </header>
               {children}
