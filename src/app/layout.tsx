@@ -15,6 +15,16 @@ import {
   WalletModalProvider,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
+import {
+  PhantomWalletAdapter as getPhantomWallet,
+  ParticleAdapter as getParticleWallet,
+  SolflareWalletAdapter as getSolflareWallet,
+  SolongWalletAdapter as getSolongWallet,
+  CoinbaseWalletAdapter as getCoinbaseWallet,
+  LedgerWalletAdapter as getLedgerWallet,
+  Coin98WalletAdapter as getCoin98Wallet,
+  WalletConnectWalletAdapter as getWalletConnectWallet,
+} from "@solana/wallet-adapter-wallets";
 import Link from "next/link";
 
 const geistSans = Geist({
@@ -38,7 +48,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const endpoint = clusterApiUrl("devnet");
-  const wallets = useMemo(() => [], []);
+  const wallets = useMemo(
+    () => [
+      new getPhantomWallet(),
+      new getParticleWallet(),
+      new getSolongWallet(),
+      new getSolflareWallet(),
+      new getCoinbaseWallet(),
+      new getLedgerWallet(),
+      new getCoin98Wallet(),
+    ],
+    []
+  );
   return (
     <html lang="en">
       <body
