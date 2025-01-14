@@ -13,7 +13,7 @@ import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import {
   WalletModalProvider,
-  WalletMultiButton,
+  // WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import {
   PhantomWalletAdapter as getPhantomWallet,
@@ -23,9 +23,9 @@ import {
   CoinbaseWalletAdapter as getCoinbaseWallet,
   LedgerWalletAdapter as getLedgerWallet,
   Coin98WalletAdapter as getCoin98Wallet,
-  WalletConnectWalletAdapter as getWalletConnectWallet,
 } from "@solana/wallet-adapter-wallets";
 import Link from "next/link";
+import WalletMultiButton from "@/components/WalletMultiButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,6 +67,7 @@ export default function RootLayout({
       >
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
+            {/* {console.log(wallets)} */}
             <WalletModalProvider>
               <header className=" flex justify-between items-center p-2 border-b">
                 <div className="">
@@ -82,7 +83,8 @@ export default function RootLayout({
                     </li>
                   </ol>
                 </div>
-                <WalletMultiButton className="p-0 m-0 h-5" />
+                <WalletMultiButton wallets={wallets} />
+                {/* <WalletMultiButton className="p-0 m-0 h-5" /> */}
               </header>
               {children}
             </WalletModalProvider>
