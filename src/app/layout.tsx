@@ -81,6 +81,18 @@ export default function RootLayout({
                     <li>
                       <Link href="/account/send">Send</Link>
                     </li>
+
+                    <li>
+                      <Link href="/account/query">Query</Link>
+                    </li>
+
+                    <li>
+                      <Link href="/ping">Ping</Link>
+                    </li>
+
+                    <li>
+                      <Link href="/pay-ui">Pay UI</Link>
+                    </li>
                   </ol>
                 </div>
                 <WalletMultiButton />
