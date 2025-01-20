@@ -26,6 +26,7 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import Link from "next/link";
 import WalletMultiButton from "@/components/WalletMultiButton";
+import Settings from "@/components/settings";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -98,7 +99,11 @@ export default function RootLayout({
                     </li>
                   </ol>
                 </div>
-                <WalletMultiButton />
+                <div className="flex gap-2 h-14 items-center">
+                  <WalletMultiButton />
+                  <Settings />
+                </div>
+
                 {/* <WalletMultiButton className="p-0 m-0 h-5" /> */}
               </header>
               {children}
