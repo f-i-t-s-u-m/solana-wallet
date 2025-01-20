@@ -18,7 +18,9 @@ const QueryPage = () => {
       return;
     }
     setStatus(
-      `account balance: ${(res.data?.balance / LAMPORTS_PER_SOL).toFixed()}`
+      `account balance: ${(
+        res.data?.balance ?? 0 / LAMPORTS_PER_SOL
+      ).toFixed()}`
     );
     setLoading(false);
   };
@@ -43,7 +45,7 @@ const QueryPage = () => {
             className="bg-neutral-800  min-w-52 py-2 rounded-lg text-white"
             onClick={handleQuery}
           >
-            {loading ? "Loading" : "Query .."}
+            {loading ? "Loading..." : "Query"}
           </button>
         </div>
       </div>

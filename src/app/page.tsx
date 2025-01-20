@@ -1,9 +1,10 @@
 "use client";
 
 import { NextPage } from "next";
+import PayUI from "./pay-ui/page";
 
 const Page: NextPage = () => {
-  return <div>hello</div>;
+  return <PayUI />;
 };
 
 export default Page;

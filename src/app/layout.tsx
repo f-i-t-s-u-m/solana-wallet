@@ -70,28 +70,31 @@ export default function RootLayout({
             {/* {console.log(wallets)} */}
             <WalletModalProvider>
               <header className=" flex justify-between items-center p-2 border-b">
+                <div>!Matrix</div>
                 <div className="">
                   <ol className="flex list-none gap-2">
                     <li>
                       <Link href="/">Home</Link>
                     </li>
+                    |
                     <li>
                       <Link href="/account">Account</Link>
                     </li>
+                    |
                     <li>
                       <Link href="/account/send">Send</Link>
                     </li>
-
+                    |
                     <li>
                       <Link href="/account/query">Query</Link>
                     </li>
-
+                    |
                     <li>
                       <Link href="/ping">Ping</Link>
                     </li>
-
+                    |
                     <li>
-                      <Link href="/pay-ui">Pay UI</Link>
+                      <Link href="/pay-ui">Pay-UI</Link>
                     </li>
                   </ol>
                 </div>
