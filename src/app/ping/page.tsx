@@ -58,7 +58,7 @@ const PingProgram: React.FC = () => {
         <input
           className="p-2 rounded-lg mx-1 border"
           type="text"
-          value={payer}
+          value={payer as unknown as string}
           onChange={(e) => setPayer(JSON.parse(e.target.value))}
         />
       </div>

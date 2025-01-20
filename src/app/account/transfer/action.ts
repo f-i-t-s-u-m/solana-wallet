@@ -1,11 +1,8 @@
 "use server";
 
 import {
-  clusterApiUrl,
-  Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
-  sendAndConfirmTransaction,
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
@@ -22,7 +19,7 @@ export const transferSol = async ({
   const sender = new PublicKey(senderPKey);
   const recipient = new PublicKey(recipientPKey);
 
-  const connection = new Connection(clusterApiUrl("devnet"));
+  // const connection = new Connection(clusterApiUrl("devnet"));
 
   const transaction = new Transaction();
 
@@ -35,15 +32,13 @@ export const transferSol = async ({
   transaction.add(sendInstruction);
 
   try {
-    const checkSign = await sendAndConfirmTransaction(connection, transaction, [
-      sender,
-    ]);
+    // const checkSign = await sendAndConfirmTransaction(connection, transaction, [
+    //   sender,
+    // ]);
 
     return {
       status: "ok",
-      data: {
-        checkSign,
-      },
+      data: "checkSign",
     };
   } catch (error) {
     return {

@@ -17,7 +17,12 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
-import { ArrowLeft, CircleXIcon, PartyPopperIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  CircleXIcon,
+  PartyPopperIcon,
+  RotateCwIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 const OpenUi: React.FC<{
@@ -25,6 +30,7 @@ const OpenUi: React.FC<{
   setOpen: Dispatch<SetStateAction<boolean>>;
   amount: number;
 }> = ({ open, setOpen, amount }) => {
+  const [loading, setLoading] = useState(false);
   const { wallets, wallet, select, publicKey, signTransaction } = useWallet();
   const connection = new Connection("https://api.devnet.solana.com");
   const fibaWalletAddress = new PublicKey(
@@ -36,6 +42,8 @@ const OpenUi: React.FC<{
   );
 
   const handlePay = async () => {
+    if (!wallet || !publicKey || !signTransaction) return;
+    setLoading(true);
     try {
       const transaction = new Transaction().add(
         SystemProgram.transfer({
@@ -58,6 +66,8 @@ const OpenUi: React.FC<{
     } catch (error) {
       setStep("error");
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,7 +116,13 @@ const OpenUi: React.FC<{
                     onClick={handlePay}
                     className="bg-blue-500 text-white px-4 py-2 min-w-56 rounded-md mt-4"
                   >
-                    Pay now
+                    {loading ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <RotateCwIcon className="w-5 h-5 animate-spin" />
+                      </div>
+                    ) : (
+                      "Pay now"
+                    )}
                   </button>
                 </div>
               )}

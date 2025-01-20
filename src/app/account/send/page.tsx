@@ -21,7 +21,7 @@ const SendSol = () => {
   const wallet = useWallet();
 
   const sendSol = async () => {
-    if (!wallet.connected || !wallet.publicKey) {
+    if (!wallet.connected || !wallet.publicKey || !wallet.signTransaction) {
       setStatus("Wallet not connected");
       throw new WalletNotConnectedError();
     }
@@ -53,7 +53,7 @@ const SendSol = () => {
       setStatus(`Transaction successful! Signature: ${signature}`);
     } catch (error) {
       // console.error(error);
-      setStatus(`Transaction failed: ${error.message}`);
+      setStatus(`Transaction failed: ${error}`);
     }
   };
 

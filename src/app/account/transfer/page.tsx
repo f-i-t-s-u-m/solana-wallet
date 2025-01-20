@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { transferSol } from "./action";
 
 const Transfer = () => {
-  const [recipientAddress, setRecipientAddress] = useState();
-  const [status, setStatus] = useState();
+  const [recipientAddress, setRecipientAddress] = useState("");
+  const [status] = useState();
   const [amount, setAmount] = useState(0);
-  const [loading, setLoading] = useState(false)
 
   const sendSol = () => {
-      await transferSol({
-        
-      })
+    // await transferSol({
+    // })
   };
   return (
     <div>
@@ -37,7 +34,7 @@ const Transfer = () => {
               placeholder="Amount (SOL)"
               className="p-2 border min-w-96 rounded-md text-neutral-600"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(e.target.valueAsNumber)}
             />
           </div>
           <button
