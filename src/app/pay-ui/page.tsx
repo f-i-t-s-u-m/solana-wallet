@@ -21,7 +21,7 @@ const PayUI = () => {
             value={amount}
             onChange={(e) => setAmount(e.target.value as unknown as number)}
             className="border  p-2 rounded-md min-w-72"
-            placeholder="Write public account address"
+            placeholder="Amount to request"
           />
         </div>
         <div>

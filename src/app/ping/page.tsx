@@ -2,8 +2,11 @@
 
 import React, { useState } from "react";
 import PingProgramAction from "./action";
+import { useAtomValue } from "jotai";
+import { rpcUrlAtom } from "@/lib/atom";
 
 const PingProgram: React.FC = () => {
+  const rpcUrl = useAtomValue(rpcUrlAtom);
   const [programDataAddress, setProgramDataAddress] = useState(
     "Ah9K7dQ8EHaZqcAsgBW8w37yN2eAy3koFmUn4x3CJtod"
   );
@@ -11,7 +14,7 @@ const PingProgram: React.FC = () => {
     "ChT1B39WKLS8qUrkLvFDXMhEJ4F1XZzwUNHUt4AU9aVa"
   );
   const [status, setStatus] = useState("");
-  const [payer, setPayer] = useState<number[]>([0]);
+  const [payer, setPayer] = useState("[0, 0, 0]");
 
   const handleSearch = async () => {
     setStatus(
@@ -21,7 +24,8 @@ const PingProgram: React.FC = () => {
     const resp = await PingProgramAction({
       ProgramDataId: programDataAddress,
       programId,
-      payerKey: payer as unknown as number[],
+      payerKey: JSON.parse(payer),
+      rpcUrl,
     });
 
     if (resp.error) {
@@ -59,11 +63,12 @@ const PingProgram: React.FC = () => {
           className="p-2 rounded-lg mx-1 border"
           type="text"
           value={payer as unknown as string}
-          onChange={(e) => setPayer(JSON.parse(e.target.value))}
+          onChange={(e) => setPayer(e.target.value)}
+          placeholder=" Paste your wallet private key here"
         />
       </div>
       <button
-        className=" bg-white/10 px-5 w-52 rounded-lg py-2"
+        className="  px-5 text-white rounded-lg py-2 *:hover:bg-white/20 bg-sky-500 w-full "
         onClick={handleSearch}
       >
         Search

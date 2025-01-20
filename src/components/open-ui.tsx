@@ -24,15 +24,18 @@ import {
   RotateCwIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { useAtomValue } from "jotai";
+import { rpcUrlAtom } from "@/lib/atom";
 
 const OpenUi: React.FC<{
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   amount: number;
 }> = ({ open, setOpen, amount }) => {
+  const rpcUrl = useAtomValue(rpcUrlAtom);
   const [loading, setLoading] = useState(false);
   const { wallets, wallet, select, publicKey, signTransaction } = useWallet();
-  const connection = new Connection("https://api.devnet.solana.com");
+  const connection = new Connection(rpcUrl);
   const fibaWalletAddress = new PublicKey(
     "2Rxt86WDda8vaxqYKhbVnDKQuHX7bBMAECNizGBZ3MuC"
   );

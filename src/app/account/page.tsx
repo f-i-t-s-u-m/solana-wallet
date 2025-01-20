@@ -1,14 +1,17 @@
 "use client";
 
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { rpcUrlAtom } from "@/lib/atom";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { useAtomValue } from "jotai";
 import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 const AccountPage: NextPage = () => {
+  const rpcUrl = useAtomValue(rpcUrlAtom);
   const [balance, setBalance] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const { connection } = useConnection();
+  const connection = useMemo(() => new Connection(rpcUrl), [rpcUrl]);
   const { publicKey } = useWallet();
 
   useEffect(() => {

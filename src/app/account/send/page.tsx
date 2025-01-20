@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  clusterApiUrl,
   Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
@@ -11,8 +10,11 @@ import {
 } from "@solana/web3.js";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
+import { rpcUrlAtom } from "@/lib/atom";
+import { useAtomValue } from "jotai";
 
 const SendSol = () => {
+  const rpcUrl = useAtomValue(rpcUrlAtom);
   const [recipientAddress, setRecipientAddress] = useState(
     "vAasNXD7iTYNMHmeh3973i2nEk2TCVv4C6EcATGGYLn"
   );
@@ -26,7 +28,7 @@ const SendSol = () => {
       throw new WalletNotConnectedError();
     }
 
-    const connection = new Connection(clusterApiUrl("devnet")); // or 'https://api.devnet.solana.com'
+    const connection = new Connection(rpcUrl, "confirmed");
     const recipient = new PublicKey(recipientAddress);
     const lamports = LAMPORTS_PER_SOL;
 

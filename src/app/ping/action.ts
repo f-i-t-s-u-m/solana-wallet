@@ -1,7 +1,6 @@
 "use server";
 
 import {
-  clusterApiUrl,
   Connection,
   Keypair,
   PublicKey,
@@ -14,17 +13,19 @@ export default async function PingProgramAction({
   programId,
   ProgramDataId,
   payerKey,
+  rpcUrl,
 }: {
   programId: string;
   ProgramDataId: string;
   payerKey: number[];
+  rpcUrl: string;
 }) {
   try {
     const pingProgramId = new PublicKey(programId);
     const pingProgramDataId = new PublicKey(ProgramDataId);
     const payer = Keypair.fromSecretKey(new Uint8Array(payerKey));
 
-    const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+    const connection = new Connection(rpcUrl, "confirmed");
 
     const transaction = new Transaction();
 

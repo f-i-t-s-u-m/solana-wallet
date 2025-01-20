@@ -3,25 +3,25 @@
 import { useState } from "react";
 import { checkBalance } from "./action";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { useAtomValue } from "jotai";
+import { rpcUrlAtom } from "@/lib/atom";
 
 const QueryPage = () => {
+  const rpcUrl = useAtomValue(rpcUrlAtom);
   const [loading, setLoading] = useState(false);
   const [pkey, setPkey] = useState("");
   const [status, setStatus] = useState("");
   const handleQuery = async () => {
     if (!pkey.length) return;
     setLoading(true);
-    const res = await checkBalance(pkey);
+    const res = await checkBalance(pkey, rpcUrl);
     if (res.status === "error") {
       setStatus(`${res.error}`);
       setLoading(false);
       return;
     }
-    setStatus(
-      `account balance: ${(
-        res.data?.balance ?? 0 / LAMPORTS_PER_SOL
-      ).toFixed()}`
-    );
+    const balance = res.data?.balance || 0;
+    setStatus(`account balance: ${(balance / LAMPORTS_PER_SOL).toFixed()}`);
     setLoading(false);
   };
   return (

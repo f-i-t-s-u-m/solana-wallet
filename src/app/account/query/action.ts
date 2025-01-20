@@ -1,11 +1,11 @@
 "use server";
 
-import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";
 
-export const checkBalance = async (address: string) => {
+export const checkBalance = async (address: string, rpcUrl: string) => {
   try {
     const publicKey = new PublicKey(address);
-    const connection = new Connection(clusterApiUrl("devnet"));
+    const connection = new Connection(rpcUrl);
     const balance = await connection.getBalance(publicKey);
     return {
       status: "ok",

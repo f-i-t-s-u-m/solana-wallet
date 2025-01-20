@@ -3,16 +3,20 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { rpcUrlAtom } from "@/lib/atom";
+import { useAtom } from "jotai";
 import { SettingsIcon } from "lucide-react";
 
 const Settings = () => {
+  const [rpcUrl, setRpcUrl] = useAtom(rpcUrlAtom);
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <button className="border  p-1.5 rounded-lg">
           <SettingsIcon />
         </button>
@@ -26,7 +30,8 @@ const Settings = () => {
             name="network"
             className="mr-2 w-full  *:mr-0 border rounded-md p-2"
             placeholder="solana rpc url"
-            value={"https://api.devnet.solana.com"}
+            value={rpcUrl}
+            onChange={(e) => setRpcUrl(e.target.value)}
           />
         </div>
         <DropdownMenuSeparator />
@@ -40,11 +45,11 @@ const Settings = () => {
             <option value="finalized">Finalized</option>
           </select>
         </div>
-        <div>
+        <DropdownMenuItem>
           <button className="bg-blue-500 text-white p-2 mt-5 w-full rounded-md">
             Save
           </button>
-        </div>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
